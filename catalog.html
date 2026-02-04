@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog | CodeCrate PH</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Standard Glass for Cards */
+        .glass { 
+            background: rgba(255, 255, 255, 0.75); 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px); 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+        }
+        .dark .glass { 
+            background: rgba(15, 23, 42, 0.6); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+        }
+
+        /* NEW: Responsive Nav Glass (Less transparent on mobile) */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95); /* Mobile: 95% Opaque */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass-nav {
+            background: rgba(15, 23, 42, 0.95); /* Mobile: 95% Opaque */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (min-width: 768px) {
+            .glass-nav {
+                background: rgba(255, 255, 255, 0.75); /* Desktop: 75% Opaque */
+            }
+            .dark .glass-nav {
+                background: rgba(15, 23, 42, 0.6); /* Desktop: 60% Opaque */
+            }
+        }
+
+        .bg-grid { background-image: linear-gradient(to right, rgba(128, 128, 128, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(128, 128, 128, 0.05) 1px, transparent 1px); background-size: 40px 40px; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        
+        .custom-checkbox:checked + div { background-color: #3b82f6; border-color: #3b82f6; }
+        .custom-checkbox:checked + div svg { display: block; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-500 min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <div class="fixed inset-0 pointer-events-none z-0 bg-grid"></div>
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-extrabold tracking-tighter flex items-center gap-2 group">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white group-hover:rotate-12 transition-transform"><i class="fas fa-code text-sm"></i></div>
+                <div>Code<span class="text-blue-600 dark:text-blue-400">Crate</span>PH</div>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold">
+                
+                <a href="index.html" class="relative group py-1">
+                    <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">Home</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <a href="catalog.html" class="relative group py-1 text-blue-600 dark:text-blue-400 font-bold">
+                    <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">Marketplace</span>
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400"></span>
+                </a>
+
+                <a href="how-it-works.html" class="relative group py-1">
+                    <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">How It Works</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <a href="contact.html" class="relative group py-1">
+                    <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">Contact Us</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-4">
+                <button onclick="toggleTheme()" class="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center transition hover:scale-110"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:block"></i></button>
+                <a href="login.html" class="text-sm font-semibold hover:text-blue-500">Log In</a>
+                <a href="register.html" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-full transition shadow-lg shadow-blue-500/30 hover:-translate-y-0.5">Sell Code</a>
+            </div>
+
+            <button class="md:hidden text-2xl text-slate-700 dark:text-slate-200 focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full glass-nav border-t border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-4 shadow-xl z-50 animate-fade-in-up">
+            <a href="index.html" class="py-2 font-medium text-center hover:text-blue-500">Home</a>
+            <a href="catalog.html" class="py-2 font-medium text-center hover:text-blue-500">Marketplace</a>
+            <a href="how-it-works.html" class="py-2 font-medium text-center hover:text-blue-500">How It Works</a>
+            <a href="contact.html" class="py-2 font-bold text-blue-600 text-center">Contact Us</a>
+            <hr class="border-slate-200 dark:border-slate-700">
+            <div class="flex justify-center gap-4 py-2">
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:block"></i></button>
+            </div>
+            <a href="login.html" class="py-2 font-medium text-center hover:text-blue-500">Log In</a>
+            <a href="register.html" class="py-3 bg-blue-600 text-white font-bold rounded-xl text-center">Sell Code</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-24 relative z-10 container mx-auto px-4 md:px-6 py-12">
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <aside class="w-full lg:w-1/4 h-fit lg:sticky lg:top-28 z-20">
+                <div class="glass rounded-2xl animate-fade-in-up overflow-hidden">
+                    
+                    <button onclick="toggleFilters()" class="w-full p-4 md:p-6 flex justify-between items-center lg:hidden bg-slate-50/50 dark:bg-slate-900/50">
+                        <h3 class="font-bold text-lg"><i class="fas fa-filter mr-2 text-blue-500"></i> Filters</h3>
+                        <i id="filterArrow" class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+
+                    <div id="filterContent" class="hidden lg:block p-4 md:p-6 pt-0 lg:pt-6 border-t border-slate-200 dark:border-slate-700 lg:border-none">
+                        
+                        <div class="hidden lg:flex justify-between items-center mb-6">
+                            <h3 class="font-bold text-lg">Filters</h3>
+                            <button class="text-xs text-blue-500 hover:underline">Reset</button>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="text-xs font-bold text-slate-500 uppercase mb-2 block">Search</label>
+                            <div class="relative">
+                                <input type="text" placeholder="e.g. Inventory..." class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-300 dark:border-slate-700 rounded-lg py-2 pl-3 pr-10 text-sm focus:outline-none focus:border-blue-500 transition-colors">
+                                <i class="fas fa-search absolute right-3 top-2.5 text-slate-400"></i>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="text-xs font-bold text-slate-500 uppercase mb-3 block">Tech Stack</label>
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div class="relative"><input type="checkbox" class="peer custom-checkbox sr-only"><div class="h-5 w-5 rounded border border-slate-400 dark:border-slate-600 bg-slate-100 dark:bg-slate-800 transition-all peer-checked:bg-blue-600 peer-checked:border-blue-600 flex items-center justify-center shadow-sm"><svg class="w-3 h-3 text-white hidden pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div></div>
+                                    <span class="text-sm font-medium text-slate-600 dark:text-slate-300 group-hover:text-blue-500 transition-colors">PHP / Laravel</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div class="relative"><input type="checkbox" class="peer custom-checkbox sr-only"><div class="h-5 w-5 rounded border border-slate-400 dark:border-slate-600 bg-slate-100 dark:bg-slate-800 transition-all peer-checked:bg-blue-600 peer-checked:border-blue-600 flex items-center justify-center shadow-sm"><svg class="w-3 h-3 text-white hidden pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div></div>
+                                    <span class="text-sm font-medium text-slate-600 dark:text-slate-300 group-hover:text-blue-500 transition-colors">C# / VB.NET</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div class="relative"><input type="checkbox" class="peer custom-checkbox sr-only"><div class="h-5 w-5 rounded border border-slate-400 dark:border-slate-600 bg-slate-100 dark:bg-slate-800 transition-all peer-checked:bg-blue-600 peer-checked:border-blue-600 flex items-center justify-center shadow-sm"><svg class="w-3 h-3 text-white hidden pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div></div>
+                                    <span class="text-sm font-medium text-slate-600 dark:text-slate-300 group-hover:text-blue-500 transition-colors">Python</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div class="relative"><input type="checkbox" class="peer custom-checkbox sr-only"><div class="h-5 w-5 rounded border border-slate-400 dark:border-slate-600 bg-slate-100 dark:bg-slate-800 transition-all peer-checked:bg-blue-600 peer-checked:border-blue-600 flex items-center justify-center shadow-sm"><svg class="w-3 h-3 text-white hidden pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div></div>
+                                    <span class="text-sm font-medium text-slate-600 dark:text-slate-300 group-hover:text-blue-500 transition-colors">Java / Android</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="text-xs font-bold text-slate-500 uppercase mb-3 block">Price Range</label>
+                            <div class="flex items-center gap-3">
+                                <div class="relative w-full">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><span class="text-slate-500 font-bold">₱</span></div>
+                                    <input type="number" placeholder="Min" class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-8 p-2.5 transition-all focus:bg-white dark:focus:bg-slate-800">
+                                </div>
+                                <span class="text-slate-400 font-bold">-</span>
+                                <div class="relative w-full">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><span class="text-slate-500 font-bold">₱</span></div>
+                                    <input type="number" placeholder="Max" class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-8 p-2.5 transition-all focus:bg-white dark:focus:bg-slate-800">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition text-sm shadow-lg shadow-blue-500/30 transform active:scale-95">Apply Filters</button>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="w-full lg:w-3/4">
+                
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 animate-fade-in-up relative z-30 gap-4">
+                    <span class="text-sm text-slate-500">Showing 12 Results</span>
+                    
+                    <div class="relative w-full sm:w-auto min-w-[200px]">
+                        <input type="hidden" id="sortValue" value="Newest First">
+                        
+                        <button onclick="toggleSort()" id="sortTrigger" class="glass px-4 py-2 rounded-lg flex items-center justify-between w-full text-sm font-bold text-slate-700 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-800 transition-all border border-slate-200 dark:border-slate-700">
+                            <span id="sortText">Newest First</span>
+                            <i id="sortArrow" class="fas fa-chevron-down text-xs transition-transform duration-300 text-slate-400"></i>
+                        </button>
+                        
+                        <div id="sortMenu" class="absolute hidden z-50 w-full mt-2 glass rounded-xl shadow-2xl overflow-hidden transform origin-top transition-all duration-200 ring-1 ring-black ring-opacity-5">
+                            <div class="flex flex-col py-1">
+                                <div onclick="selectSort(this, 'Newest First')" class="sort-option px-4 py-2 cursor-pointer text-sm transition-colors flex justify-between items-center text-blue-600 font-bold bg-blue-50 dark:bg-slate-800/80">
+                                    <span>Newest First</span>
+                                    <i class="fas fa-check text-xs"></i>
+                                </div>
+                                <div onclick="selectSort(this, 'Price: Low to High')" class="sort-option px-4 py-2 hover:bg-blue-50 dark:hover:bg-slate-800 cursor-pointer text-sm transition-colors flex justify-between items-center text-slate-600 dark:text-slate-300">
+                                    <span>Price: Low to High</span>
+                                    <i class="fas fa-check text-xs hidden"></i>
+                                </div>
+                                <div onclick="selectSort(this, 'Price: High to Low')" class="sort-option px-4 py-2 hover:bg-blue-50 dark:hover:bg-slate-800 cursor-pointer text-sm transition-colors flex justify-between items-center text-slate-600 dark:text-slate-300">
+                                    <span>Price: High to Low</span>
+                                    <i class="fas fa-check text-xs hidden"></i>
+                                </div>
+                                <div onclick="selectSort(this, 'Highest Rated')" class="sort-option px-4 py-2 hover:bg-blue-50 dark:hover:bg-slate-800 cursor-pointer text-sm transition-colors flex justify-between items-center text-slate-600 dark:text-slate-300">
+                                    <span>Highest Rated</span>
+                                    <i class="fas fa-check text-xs hidden"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in-up relative z-0" style="animation-delay: 100ms;">
+                    
+                    <a href="details.html" class="glass rounded-2xl overflow-hidden hover:border-blue-500 transition-colors group cursor-pointer h-full flex flex-col hover:shadow-xl hover:shadow-blue-500/10">
+                        <div class="h-40 bg-slate-800 relative flex items-center justify-center text-slate-700 group-hover:bg-slate-700 transition-colors"><i class="fas fa-code text-4xl"></i></div>
+                        <div class="p-4 md:p-5 flex flex-col flex-grow">
+                            <h3 class="font-bold text-base mb-1 group-hover:text-blue-500 transition-colors line-clamp-1">Enrollment System V2</h3>
+                            <div class="flex gap-2 my-2">
+                                <span class="px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-600 text-[10px] font-bold rounded">VB.NET</span>
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-bold rounded">SQL</span>
+                            </div>
+                            <div class="mt-auto pt-4 flex justify-between items-center border-t border-slate-200 dark:border-slate-700">
+                                <span class="text-xs text-slate-500">By Admin101</span>
+                                <span class="font-bold text-emerald-500">₱350</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="details.html" class="glass rounded-2xl overflow-hidden hover:border-blue-500 transition-colors group cursor-pointer h-full flex flex-col hover:shadow-xl hover:shadow-blue-500/10">
+                        <div class="h-40 bg-slate-800 relative flex items-center justify-center text-slate-700 group-hover:bg-slate-700 transition-colors"><i class="fas fa-shopping-cart text-4xl"></i></div>
+                        <div class="p-4 md:p-5 flex flex-col flex-grow">
+                            <h3 class="font-bold text-base mb-1 group-hover:text-blue-500 transition-colors line-clamp-1">E-Commerce Web App</h3>
+                            <div class="flex gap-2 my-2">
+                                <span class="px-2 py-0.5 bg-orange-100 dark:bg-orange-900/30 text-orange-600 text-[10px] font-bold rounded">PHP</span>
+                                <span class="px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-600 text-[10px] font-bold rounded">React</span>
+                            </div>
+                            <div class="mt-auto pt-4 flex justify-between items-center border-t border-slate-200 dark:border-slate-700">
+                                <span class="text-xs text-slate-500">By DevGuy</span>
+                                <span class="font-bold text-emerald-500">₱800</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="details.html" class="glass rounded-2xl overflow-hidden hover:border-blue-500 transition-colors group cursor-pointer h-full flex flex-col hover:shadow-xl hover:shadow-blue-500/10">
+                        <div class="h-40 bg-slate-800 relative flex items-center justify-center text-slate-700 group-hover:bg-slate-700 transition-colors"><i class="fas fa-qrcode text-4xl"></i></div>
+                        <div class="p-4 md:p-5 flex flex-col flex-grow">
+                            <h3 class="font-bold text-base mb-1 group-hover:text-blue-500 transition-colors line-clamp-1">QR Attendance</h3>
+                            <div class="flex gap-2 my-2">
+                                <span class="px-2 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-600 text-[10px] font-bold rounded">Python</span>
+                            </div>
+                            <div class="mt-auto pt-4 flex justify-between items-center border-t border-slate-200 dark:border-slate-700">
+                                <span class="text-xs text-slate-500">By PyMaster</span>
+                                <span class="font-bold text-emerald-500">₱450</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="details.html" class="glass rounded-2xl overflow-hidden hover:border-blue-500 transition-colors group cursor-pointer h-full flex flex-col hover:shadow-xl hover:shadow-blue-500/10">
+                        <div class="h-40 bg-slate-800 relative flex items-center justify-center text-slate-700 group-hover:bg-slate-700 transition-colors"><i class="fas fa-code text-4xl"></i></div>
+                        <div class="p-4 md:p-5 flex flex-col flex-grow">
+                            <h3 class="font-bold text-base mb-1 group-hover:text-blue-500 transition-colors line-clamp-1">Enrollment System V2</h3>
+                            <div class="flex gap-2 my-2">
+                                <span class="px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-600 text-[10px] font-bold rounded">VB.NET</span>
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-bold rounded">SQL</span>
+                            </div>
+                            <div class="mt-auto pt-4 flex justify-between items-center border-t border-slate-200 dark:border-slate-700">
+                                <span class="text-xs text-slate-500">By Admin101</span>
+                                <span class="font-bold text-emerald-500">₱350</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="flex justify-center mt-12 animate-fade-in-up" style="animation-delay: 200ms;">
+                    <nav aria-label="Page navigation">
+                        <ul class="inline-flex items-center -space-x-px gap-2">
+                            <li><a href="#" class="w-10 h-10 flex items-center justify-center rounded-full glass text-slate-500 hover:text-blue-600 dark:hover:text-white hover:scale-110 transition-all duration-300 shadow-sm hover:shadow-blue-500/20"><i class="fas fa-chevron-left"></i></a></li>
+                            <li><a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold shadow-lg shadow-blue-500/30 scale-110 transform transition-transform border border-blue-400">1</a></li>
+                            <li><a href="#" class="w-10 h-10 flex items-center justify-center rounded-full glass text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 hover:scale-110 transition-all duration-300 hover:text-blue-500">2</a></li>
+                            <li><a href="#" class="w-10 h-10 flex items-center justify-center rounded-full glass text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 hover:scale-110 transition-all duration-300 hover:text-blue-500">3</a></li>
+                            <li><a href="#" class="w-10 h-10 flex items-center justify-center rounded-full glass text-slate-500 hover:text-blue-600 dark:hover:text-white hover:scale-110 transition-all duration-300 shadow-sm hover:shadow-blue-500/20"><i class="fas fa-chevron-right"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-slate-900/30 backdrop-blur-md relative z-10 animate-fade-in-up" style="animation-delay: 500ms;">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div class="space-y-4">
+                    <a href="index.html" class="text-2xl font-extrabold tracking-tighter flex items-center gap-2 group">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white group-hover:rotate-12 transition-transform duration-500"><i class="fas fa-code text-sm"></i></div>
+                        <div>Code<span class="text-blue-600 dark:text-blue-400">Crate</span>PH</div>
+                    </a>
+                    <p class="text-sm text-slate-500 leading-relaxed">
+                        The #1 marketplace for student capstone projects in the Philippines. Buy verified source code or sell your old projects.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-slate-400 hover:text-blue-600 transition-all duration-300 hover:-translate-y-1"><i class="fab fa-facebook-f text-lg"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-all duration-300 hover:-translate-y-1"><i class="fab fa-twitter text-lg"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-pink-500 transition-all duration-300 hover:-translate-y-1"><i class="fab fa-instagram text-lg"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all duration-300 hover:-translate-y-1"><i class="fab fa-github text-lg"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-6">Platform</h4>
+                    <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                        <li><a href="catalog.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Browse Projects</a></li>
+                        <li><a href="register.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Sell Your Code</a></li>
+                        <li><a href="how-it-works.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">How It Works</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Pricing</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-6">Support</h4>
+                    <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                        <li><a href="contact.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Help Center</a></li>
+                        <li><a href="faqs.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">FAQs</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Community Guidelines</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Report a Bug</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-6">Legal</h4>
+                    <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                        <li><a href="privacy.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Refund Policy</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-xs text-slate-500 text-center md:text-left flex items-center gap-1">
+                    &copy; 2026 CodeCrate Philippines Inc. Made with 
+                    <i class="fas fa-heart text-red-500 animate-heartbeat"></i> 
+                    in Manila.
+                </div>
+                <div class="flex gap-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                    <i class="fab fa-cc-visa text-2xl text-slate-600 dark:text-slate-300 hover:scale-110 transition-transform" title="Visa"></i>
+                    <i class="fab fa-cc-mastercard text-2xl text-slate-600 dark:text-slate-300 hover:scale-110 transition-transform" title="Mastercard"></i>
+                    <i class="fas fa-wallet text-2xl text-blue-500 hover:scale-110 transition-transform" title="GCash"></i>
+                    <i class="fas fa-mobile-alt text-2xl text-green-500 hover:scale-110 transition-transform" title="Maya"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        if (localStorage.theme === 'light') { document.documentElement.classList.remove('dark'); }
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) { html.classList.remove('dark'); localStorage.theme = 'light'; } 
+            else { html.classList.add('dark'); localStorage.theme = 'dark'; }
+        }
+
+        // Mobile Menu Logic
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('animate-fade-in-up');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
+        // Mobile Filter Toggle
+        function toggleFilters() {
+            const content = document.getElementById('filterContent');
+            const arrow = document.getElementById('filterArrow');
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                arrow.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        // Dropdown Logic
+        function toggleSort() {
+            const menu = document.getElementById('sortMenu');
+            const arrow = document.getElementById('sortArrow');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('animate-fade-in-up');
+                arrow.classList.add('rotate-180');
+            } else {
+                menu.classList.add('hidden');
+                menu.classList.remove('animate-fade-in-up');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        function selectSort(element, value) {
+            document.getElementById('sortValue').value = value;
+            document.getElementById('sortText').innerText = value;
+
+            const options = document.querySelectorAll('.sort-option');
+            options.forEach(opt => {
+                opt.classList.remove('text-blue-600', 'font-bold', 'bg-blue-50', 'dark:bg-slate-800/80');
+                opt.classList.add('text-slate-600', 'dark:text-slate-300', 'hover:bg-blue-50', 'dark:hover:bg-slate-800');
+                opt.querySelector('.fa-check').classList.add('hidden');
+            });
+
+            element.classList.remove('text-slate-600', 'dark:text-slate-300', 'hover:bg-blue-50', 'dark:hover:bg-slate-800');
+            element.classList.add('text-blue-600', 'font-bold', 'bg-blue-50', 'dark:bg-slate-800/80');
+            element.querySelector('.fa-check').classList.remove('hidden');
+
+            toggleSort();
+        }
+
+        window.onclick = function(event) {
+            const trigger = document.getElementById('sortTrigger');
+            const menu = document.getElementById('sortMenu');
+            if (trigger && menu) {
+                if (!trigger.contains(event.target) && !menu.classList.contains('hidden')) {
+                    toggleSort();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

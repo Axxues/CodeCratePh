@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCrate PH | The Capstone Marketplace</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .hidden-section { display: none !important; }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(128, 128, 128, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(128, 128, 128, 0.05) 1px, transparent 1px);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        
+        /* Remove default details marker */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-500 min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <div class="fixed inset-0 pointer-events-none z-0 bg-grid"></div>
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-500/20 rounded-full blur-[120px] -z-10 animate-blob mix-blend-multiply dark:mix-blend-screen"></div>
+    <div class="fixed bottom-0 right-0 w-[600px] h-[600px] bg-emerald-500/20 rounded-full blur-[100px] -z-10 animate-blob animation-delay-2000 mix-blend-multiply dark:mix-blend-screen"></div>
+
+    <nav class="fixed w-full z-50 glass border-b border-slate-200/50 dark:border-slate-800/50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <button onclick="nav('home')" class="text-2xl font-extrabold tracking-tighter flex items-center gap-2 group focus:outline-none">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-blue-500/30 group-hover:rotate-12 transition-transform">
+                    <i class="fas fa-cube text-sm"></i>
+                </div>
+                <div>Code<span class="text-blue-600 dark:text-blue-400">Crate</span><span class="text-xs ml-1 px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400 font-bold tracking-widest">PH</span></div>
+            </button>
+
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold tracking-wide">
+                <button id="nav-home" onclick="nav('home')" class="transition text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white">
+                    Home
+                </button>
+                <button id="nav-about" onclick="nav('about')" class="transition text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white">
+                    How It Works
+                </button>
+                <button id="nav-marketplace" onclick="nav('marketplace')" class="transition text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white">
+                    Marketplace
+                </button>
+                <button id="nav-contact" onclick="nav('contact')" class="transition text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white">
+                    Contact
+                </button>
+            </div>
+
+            <div class="hidden md:flex items-center gap-4">
+                <button onclick="toggleTheme()" class="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-yellow-400 hover:scale-110 transition">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+                <button onclick="nav('login')" class="text-sm font-semibold hover:text-blue-500 transition">Log In</button>
+                <button onclick="nav('register')" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-full shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all transform hover:-translate-y-0.5">
+                    Start Selling
+                </button>
+            </div>
+
+            <button class="md:hidden text-xl p-2" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full glass border-b border-slate-200 dark:border-slate-800 p-4 flex flex-col gap-4 text-center md:hidden shadow-xl">
+            <button onclick="nav('home')" class="py-2 font-medium w-full hover:bg-black/5 rounded">Home</button>
+            <button onclick="nav('marketplace')" class="py-2 font-medium w-full hover:bg-black/5 rounded">Marketplace</button>
+            <button onclick="nav('about')" class="py-2 font-medium w-full hover:bg-black/5 rounded">How It Works</button>
+            <button onclick="nav('login')" class="py-2 font-medium w-full hover:bg-black/5 rounded">Log In</button>
+            <button onclick="nav('register')" class="py-2 font-bold text-blue-500 w-full hover:bg-black/5 rounded">Sell Code</button>
+            <div class="border-t border-slate-500/20 my-2"></div>
+            <button onclick="toggleTheme()" class="py-2 text-sm opacity-70 w-full">Toggle Theme</button>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-24 relative z-10 min-h-screen">
+        
+        <section id="home" class="container mx-auto px-6 py-12 md:py-20 flex flex-col items-center text-center animate-fade-in-up">
+            <div class="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 text-xs font-bold tracking-wide shadow-sm">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                LIVE: 1,204 CAPSTONE TEMPLATES AVAILABLE
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6 tracking-tight">
+                Don't Panic.<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-emerald-500 animate-pulse">Finish Your Capstone.</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mb-10 leading-relaxed">
+                The Philippines' first <strong>Student-to-Student Code Exchange</strong>. 
+                Graduates sell their verified source code. Students buy starter kits to learn faster.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
+                <button onclick="nav('marketplace')" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-xl shadow-blue-500/20 transition-all hover:scale-105 flex items-center justify-center gap-2">
+                    <i class="fas fa-search"></i> Browse Templates
+                </button>
+                <button onclick="nav('register')" class="px-8 py-4 glass text-slate-800 dark:text-white font-bold rounded-xl hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all hover:scale-105 border border-slate-300 dark:border-slate-700">
+                    I Have Code to Sell
+                </button>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mt-20 w-full max-w-5xl">
+                <div class="glass p-8 rounded-2xl text-left hover:border-blue-500/50 transition-colors group">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4 group-hover:-translate-y-2 transition-transform duration-300">
+                        <i class="fas fa-file-code text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Verified Source Code</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Every project is tested by our team. No broken zip files. No missing databases.</p>
+                </div>
+                <div class="glass p-8 rounded-2xl text-left hover:border-emerald-500/50 transition-colors group">
+                    <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-4 group-hover:-translate-y-2 transition-transform duration-300">
+                        <i class="fas fa-download text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Instant Download</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Pay via GCash or Maya and get the GitHub link immediately. Start coding tonight.</p>
+                </div>
+                <div class="glass p-8 rounded-2xl text-left hover:border-purple-500/50 transition-colors group">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 mb-4 group-hover:-translate-y-2 transition-transform duration-300">
+                        <i class="fas fa-graduation-cap text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Study Templates</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Not cheating—learning. Use these as "Starter Kits" to build your own unique system.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="hidden-section container mx-auto px-6 py-20 animate-fade-in-up">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">Why Let Your Code Rot?</h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-lg mb-6 leading-relaxed">
+                        Every semester, thousands of IT students panic. Meanwhile, graduated students have excellent Capstone projects sitting on their hard drives, doing nothing.
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-400 text-lg mb-8 leading-relaxed">
+                        <strong>CodeCrate PH</strong> bridges the gap. Graduates verify and list their projects. Undergrads buy them as "Starter Templates" to save weeks of setup time.
+                    </p>
+                    <div class="flex gap-4">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600">80%</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-widest">Revenue to Seller</div>
+                        </div>
+                        <div class="w-px bg-slate-200 dark:bg-slate-700 h-12"></div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600">20%</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-widest">Commission</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-emerald-600 to-blue-600 rounded-2xl transform rotate-3 opacity-20 blur-lg"></div>
+                    <div class="glass rounded-2xl p-8 relative border border-white/20">
+                        <div class="flex gap-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="font-mono text-sm text-slate-600 dark:text-slate-300 space-y-2">
+                            <p><span class="text-purple-500">const</span> <span class="text-blue-500">transaction</span> = {</p>
+                            <p class="pl-4">seller: <span class="text-green-500">'Graduated_2024'</span>,</p>
+                            <p class="pl-4">buyer: <span class="text-green-500">'Panicking_Student'</span>,</p>
+                            <p class="pl-4">item: <span class="text-green-500">'Barangay_System_V2.zip'</span>,</p>
+                            <p class="pl-4">status: <span class="text-blue-500">SUCCESS</span></p>
+                            <p>}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="marketplace" class="hidden-section container mx-auto px-6 py-20 animate-fade-in-up">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-4xl font-bold mb-4">Popular Templates</h2>
+                <p class="text-slate-500">Verified, clean code. Ready for you to study and modify.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
+                <div class="glass p-8 rounded-3xl border border-slate-200 dark:border-slate-800 hover:border-blue-400 transition-all group">
+                    <div class="mb-4 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 w-fit px-3 py-1 rounded-full text-xs font-bold uppercase">Basic</div>
+                    <h3 class="text-lg font-bold">Inventory System</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">Perfect for System Integration 1</p>
+                    <div class="mt-4 mb-6">
+                        <span class="text-3xl font-bold tracking-tight">₱499</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm text-slate-600 dark:text-slate-300">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-500"></i> CRUD Operations</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-500"></i> PHP / MySQL</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-500"></i> Basic Admin Panel</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-xl border border-blue-600 text-blue-600 dark:text-blue-400 font-bold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition">View Details</button>
+                </div>
+
+                <div class="relative bg-slate-900 dark:bg-slate-800 p-10 rounded-3xl shadow-2xl shadow-blue-900/50 transform md:scale-110 border border-blue-500 z-10">
+                    <!-- <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-blue-400 to-purple-500"></div> -->
+                    <h3 class="text-lg font-bold text-blue-200">POS + Analytics</h3>
+                    <p class="text-sm text-slate-400 mt-2">For Capstone 1 & 2</p>
+                    <div class="mt-4 mb-6">
+                        <span class="text-4xl font-bold tracking-tight text-white">₱1,499</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm text-slate-300">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-blue-400"></i> C# .NET or VB.NET</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-blue-400"></i> Sales Reports & Charts</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-blue-400"></i> Barcode Scanner Support</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-blue-400"></i> User Roles (Cashier/Admin)</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-lg shadow-blue-500/40 transition">Buy Template</button>
+                </div>
+
+                <div class="glass p-8 rounded-3xl border border-slate-200 dark:border-slate-800 hover:border-purple-400 transition-all">
+                     <div class="mb-4 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 w-fit px-3 py-1 rounded-full text-xs font-bold uppercase">Advanced</div>
+                    <h3 class="text-lg font-bold">Barangay MIS (Web)</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">Full Thesis Ready</p>
+                    <div class="mt-4 mb-6">
+                        <span class="text-3xl font-bold tracking-tight">₱2,499</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm text-slate-600 dark:text-slate-300">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-purple-500"></i> Laravel / React</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-purple-500"></i> SMS Notification API</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-purple-500"></i> Mapping / Geolocation</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-xl border border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition">View Details</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="login" class="hidden-section container mx-auto px-6 py-20 min-h-[70vh] flex items-center justify-center animate-fade-in-up">
+            <div class="glass w-full max-w-md p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-20 -right-20 w-40 h-40 bg-blue-500/30 rounded-full blur-3xl"></div>
+                <h2 class="text-3xl font-bold mb-2">Access Portal</h2>
+                <p class="text-slate-500 text-sm mb-8">Buyers: Download files. Sellers: Check earnings.</p>
+
+                <form class="space-y-4" onsubmit="event.preventDefault();">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email</label>
+                        <input type="email" class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors" placeholder="student@university.edu.ph">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
+                        <input type="password" class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors" placeholder="••••••••">
+                    </div>
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-blue-600/30 transition-all">
+                        Login
+                    </button>
+                </form>
+
+                <div class="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700/50 text-center">
+                    <button class="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                        <i class="fab fa-github text-xl"></i> <span class="text-sm font-semibold">GitHub Login</span>
+                    </button>
+                    <p class="mt-4 text-xs text-slate-500">
+                        No account? <button onclick="nav('register')" class="text-blue-500 hover:underline">Register now</button>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="register" class="hidden-section container mx-auto px-6 py-20 min-h-[70vh] flex items-center justify-center animate-fade-in-up">
+            <div class="glass w-full max-w-md p-10 rounded-3xl shadow-2xl relative">
+                <h2 class="text-3xl font-bold mb-2">Create Account</h2>
+                <p class="text-slate-500 text-sm mb-8">Join the community. Start Buying or Selling.</p>
+
+                <form class="space-y-4" onsubmit="event.preventDefault();">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500" placeholder="First Name">
+                        <input type="text" class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500" placeholder="Last Name">
+                    </div>
+                    <input type="email" class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500" placeholder="Email Address">
+                    <input type="password" class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500" placeholder="Create Password">
+                    
+                    <div class="flex gap-4">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="role" class="accent-blue-600" checked>
+                            <span class="text-sm">I'm a Student (Buyer)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="role" class="accent-blue-600">
+                            <span class="text-sm">I'm a Graduate (Seller)</span>
+                        </label>
+                    </div>
+
+                    <button class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 text-white font-bold py-3 rounded-xl shadow-lg transition-all transform hover:-translate-y-1">
+                        Sign Up
+                    </button>
+                </form>
+                
+                <p class="mt-6 text-center text-xs text-slate-500">
+                    Already a member? <button onclick="nav('login')" class="text-blue-500 hover:underline">Login here</button>
+                </p>
+            </div>
+        </section>
+
+        <section id="contact" class="hidden-section container mx-auto px-6 py-20 animate-fade-in-up">
+             <div class="glass max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
+                <div class="bg-blue-600 p-10 md:w-2/5 text-white flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/circuit-board.png')] opacity-10"></div>
+                    <div>
+                        <h3 class="text-3xl font-bold mb-4">Support Team</h3>
+                        <p class="text-blue-100 mb-8">Found a bug in a template? Need to dispute a transaction? We're here to help.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"><i class="fas fa-map-marker-alt"></i></div>
+                                <div>
+                                    <p class="font-bold text-sm">Headquarters</p>
+                                    <p class="text-xs text-blue-100">Uptown Bonifacio, Taguig, MM</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"><i class="fas fa-envelope"></i></div>
+                                <div>
+                                    <p class="font-bold text-sm">Email</p>
+                                    <p class="text-xs text-blue-100">support@codecrate.ph</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-10 md:w-3/5 bg-slate-50 dark:bg-slate-900/50">
+                    <form class="space-y-4" onsubmit="event.preventDefault();">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Name</label>
+                                <input type="text" class="w-full border-b border-slate-300 dark:border-slate-700 bg-transparent py-2 focus:border-blue-500 focus:outline-none transition-colors">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Subject</label>
+                                
+                                <div class="relative">
+                                    <input type="hidden" id="selectedSubject" value="">
+                                    
+                                    <button type="button" 
+                                            onclick="toggleSelect()"
+                                            id="selectTrigger"
+                                            class="w-full flex items-center justify-between border-b border-slate-300 dark:border-slate-700 bg-transparent py-2 text-left text-slate-900 dark:text-slate-100 focus:outline-none hover:border-blue-500 transition-colors">
+                                        <span id="selectText" class="opacity-70">Choose an option...</span>
+                                        <i id="selectArrow" class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                                    </button>
+
+                                    <div id="selectMenu" 
+                                        class="absolute hidden z-50 w-full mt-2 glass rounded-xl shadow-xl overflow-hidden transform origin-top transition-all duration-200">
+                                        <div class="flex flex-col">
+                                            <div onclick="selectOption('Selling Inquiry')" class="px-4 py-3 hover:bg-blue-50 dark:hover:bg-slate-800 cursor-pointer text-sm transition-colors flex items-center gap-2">
+                                                <i class="fas fa-tag text-blue-500"></i> Selling Inquiry
+                                            </div>
+                                            <div onclick="selectOption('Report a Listing')" class="px-4 py-3 hover:bg-blue-50 dark:hover:bg-slate-800 cursor-pointer text-sm transition-colors flex items-center gap-2">
+                                                <i class="fas fa-flag text-red-500"></i> Report a Listing
+                                            </div>
+                                            <div onclick="selectOption('Payment Issue')" class="px-4 py-3 hover:bg-blue-50 dark:hover:bg-slate-800 cursor-pointer text-sm transition-colors flex items-center gap-2">
+                                                <i class="fas fa-wallet text-emerald-500"></i> Payment Issue
+                                            </div>
+                                            <div onclick="selectOption('Other')" class="px-4 py-3 hover:bg-blue-50 dark:hover:bg-slate-800 cursor-pointer text-sm transition-colors flex items-center gap-2">
+                                                <i class="fas fa-question-circle text-purple-500"></i> Other
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+                        <div class="pt-4">
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Message</label>
+                            <textarea class="w-full border-b border-slate-300 dark:border-slate-700 bg-transparent py-2 h-24 focus:border-blue-500 focus:outline-none transition-colors"></textarea>
+                        </div>
+                        <button class="px-8 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-lg hover:opacity-90 transition mt-4">
+                            Submit Ticket
+                        </button>
+                    </form>
+                </div>
+             </div>
+        </section>
+
+        <section id="privacy" class="hidden-section container mx-auto px-6 py-20 animate-fade-in-up">
+            <div class="glass max-w-4xl mx-auto p-10 rounded-3xl shadow-xl">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-300 dark:border-slate-700 pb-4">Privacy Policy</h2>
+                <div class="space-y-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-lg">1. Data Handling</h3>
+                        <p>We only collect data required for transactions (Email, Name, Payment Reference). We do not store source code on our own servers; all downloads are via secure, ephemeral links.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-lg">2. Seller Anonymity</h3>
+                        <p>Sellers may choose to display a pseudonym. However, real identities must be verified with CodeCrate PH admin to receive payouts (KYC).</p>
+                    </div>
+                </div>
+                <button onclick="nav('home')" class="mt-8 text-blue-500 font-bold hover:underline">← Back to Home</button>
+            </div>
+        </section>
+
+        <section id="terms" class="hidden-section container mx-auto px-6 py-20 animate-fade-in-up">
+            <div class="glass max-w-4xl mx-auto p-10 rounded-3xl shadow-xl">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-300 dark:border-slate-700 pb-4">Terms of Service</h2>
+                <div class="space-y-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-lg">1. Educational Use Only</h3>
+                        <p>CodeCrate PH sells "Study Templates". We do not condone submitting purchased code as your own original work (plagiarism). These are intended as references to help you build your own system.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-lg">2. Digital Goods Policy</h3>
+                        <p>Due to the nature of digital source code, <strong>all sales are final</strong>. Refunds are only issued if the code is proven to be corrupt or significantly different from the description.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-lg">3. Seller Commission</h3>
+                        <p>CodeCrate PH takes a flat <strong>20% commission</strong> on every completed sale to cover server costs and payment gateway fees.</p>
+                    </div>
+                </div>
+                <button onclick="nav('home')" class="mt-8 text-blue-500 font-bold hover:underline">← Back to Home</button>
+            </div>
+        </section>
+
+        <section id="faqs" class="hidden-section container mx-auto px-6 py-20 animate-fade-in-up">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+                <div class="space-y-4">
+                    <div class="glass rounded-2xl overflow-hidden">
+                        <details class="group">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 bg-slate-50/50 dark:bg-slate-900/50 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition">
+                                <span class="font-bold text-lg text-slate-800 dark:text-slate-200">Is this cheating?</span>
+                                <span class="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="text-slate-600 dark:text-slate-400 p-6 pt-0 leading-relaxed">
+                                No. You are buying a "template". Just like buying a website theme. You still need to modify it, understand the code, and defend it during your defense.
+                            </div>
+                        </details>
+                    </div>
+                    <div class="glass rounded-2xl overflow-hidden">
+                        <details class="group">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 bg-slate-50/50 dark:bg-slate-900/50 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition">
+                                <span class="font-bold text-lg text-slate-800 dark:text-slate-200">How do verified sellers get paid?</span>
+                                <span class="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="text-slate-600 dark:text-slate-400 p-6 pt-0 leading-relaxed">
+                                Sellers request a payout to their GCash or Bank Account once their balance reaches ₱1,000. Payouts are processed every Friday.
+                            </div>
+                        </details>
+                    </div>
+                     <div class="glass rounded-2xl overflow-hidden">
+                        <details class="group">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 bg-slate-50/50 dark:bg-slate-900/50 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition">
+                                <span class="font-bold text-lg text-slate-800 dark:text-slate-200">What if the code doesn't work?</span>
+                                <span class="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="text-slate-600 dark:text-slate-400 p-6 pt-0 leading-relaxed">
+                                Our admins test every upload before it goes live. However, if you encounter missing files, report it within 24 hours for a full refund.
+                            </div>
+                        </details>
+                    </div>
+                </div>
+                <div class="text-center mt-10">
+                     <button onclick="nav('home')" class="text-blue-500 font-bold hover:underline">← Back to Home</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm pt-12 pb-8 mt-12 relative z-10">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <div class="font-bold text-xl tracking-tighter mb-1">Code<span class="text-blue-500">Crate</span><span class="text-emerald-500">PH</span></div>
+                <p class="text-xs text-slate-500">© 2026 CodeCrate Philippines Inc.</p>
+            </div>
+            <div class="flex gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
+                <button onclick="nav('privacy')" class="hover:text-blue-500">Privacy Policy</button>
+                <button onclick="nav('terms')" class="hover:text-blue-500">Terms of Service</button>
+                <button onclick="nav('faqs')" class="hover:text-blue-500">FAQs</button>
+            </div>
+            <div class="flex gap-4">
+                <i class="fab fa-cc-visa text-2xl text-slate-400"></i>
+                <i class="fas fa-wallet text-2xl text-slate-400" title="GCash/Maya"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Navigation Logic ---
+        function nav(pageId) {
+            // 1. Hide all sections (Standard Logic)
+            const sections = ['home', 'about', 'marketplace', 'login', 'register', 'contact', 'privacy', 'terms', 'faqs'];
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.classList.add('hidden-section');
+            });
+
+            // 2. Show selected section (Standard Logic)
+            const selected = document.getElementById(pageId);
+            if(selected) {
+                selected.classList.remove('hidden-section');
+                selected.classList.remove('animate-fade-in-up');
+                void selected.offsetWidth; 
+                selected.classList.add('animate-fade-in-up');
+                window.scrollTo(0, 0);
+            }
+
+            // 3. HIGHLIGHT ACTIVE NAV BUTTON (New Logic)
+            const navButtons = ['home', 'about', 'marketplace', 'contact'];
+            
+            navButtons.forEach(name => {
+                const btn = document.getElementById(`nav-${name}`);
+                
+                // Only run if the button exists in the header
+                if (btn) {
+                    if (name === pageId) {
+                        // ACTIVE STATE: Blue, Bold, Unclickable
+                        btn.className = "text-blue-600 dark:text-blue-400 font-bold pointer-events-none cursor-default";
+                    } else {
+                        // INACTIVE STATE: Gray, Normal weight, Clickable
+                        btn.className = "text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-white transition cursor-pointer";
+                    }
+                }
+            });
+
+            // 4. Close mobile menu
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // --- Custom Select Dropdown Logic ---
+        function toggleSelect() {
+            const menu = document.getElementById('selectMenu');
+            const arrow = document.getElementById('selectArrow');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('animate-fade-in-up');
+                arrow.classList.add('rotate-180');
+            } else {
+                menu.classList.add('hidden');
+                menu.classList.remove('animate-fade-in-up');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        function selectOption(value) {
+            document.getElementById('selectedSubject').value = value;
+            document.getElementById('selectText').innerText = value;
+            document.getElementById('selectText').classList.remove('opacity-70');
+            document.getElementById('selectText').classList.add('font-bold');
+            toggleSelect(); // Close menu
+        }
+
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            const trigger = document.getElementById('selectTrigger');
+            const menu = document.getElementById('selectMenu');
+            if (!trigger.contains(event.target) && !menu.classList.contains('hidden')) {
+                toggleSelect();
+            }
+        }
+
+        // --- Theme Logic ---
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                html.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+
+        if (localStorage.theme === 'light') {
+            document.documentElement.classList.remove('dark');
+        }
+        
+        nav('home');
+    </script>
+</body>
+</html>

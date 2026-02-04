@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | CodeCrate PH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+                        'slide-in-left': 'slideInLeft 0.6s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'heartbeat': 'heartbeat 1.5s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        slideInLeft: { '0%': { opacity: '0', transform: 'translateX(-30px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+                        heartbeat: { '0%, 100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.2)' } }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .dark .glass { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        /* Responsive Nav Glass (Solid on Mobile, Glass on Desktop) */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95); /* Mobile: 95% Opaque */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass-nav {
+            background: rgba(15, 23, 42, 0.95); /* Mobile: 95% Opaque */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        @media (min-width: 768px) {
+            .glass-nav { background: rgba(255, 255, 255, 0.75); }
+            .dark .glass-nav { background: rgba(15, 23, 42, 0.6); }
+        }
+
+        .bg-grid { background-image: linear-gradient(to right, rgba(128, 128, 128, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(128, 128, 128, 0.05) 1px, transparent 1px); background-size: 40px 40px; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col relative overflow-x-hidden">
+    <div class="fixed inset-0 pointer-events-none z-0 bg-grid"></div>
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-extrabold tracking-tighter flex items-center gap-2 group">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white group-hover:rotate-12 transition-transform"><i class="fas fa-code text-sm"></i></div>
+                <div>Code<span class="text-blue-600 dark:text-blue-400">Crate</span>PH</div>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold">
+                
+                <a href="index.html" class="relative group py-1">
+                    <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">Home</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <a href="catalog.html" class="relative group py-1">
+                    <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">Marketplace</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <a href="how-it-works.html" class="relative group py-1">
+                    <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">How It Works</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <a href="contact.html" class="relative group py-1 text-blue-600 dark:text-blue-400 font-bold">
+                    <span>Contact Us</span>
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400"></span>
+                </a>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-4">
+                <button onclick="toggleTheme()" class="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center transition hover:scale-110"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:block"></i></button>
+                <a href="login.html" class="text-sm font-semibold hover:text-blue-500">Log In</a>
+                <a href="register.html" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-full transition shadow-lg shadow-blue-500/30 hover:-translate-y-0.5">Sell Code</a>
+            </div>
+
+            <button class="md:hidden text-2xl text-slate-700 dark:text-slate-200 focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full glass-nav border-t border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-4 shadow-xl z-50 animate-fade-in-up">
+            <a href="index.html" class="py-2 font-medium text-center hover:text-blue-500">Home</a>
+            <a href="catalog.html" class="py-2 font-medium text-center hover:text-blue-500">Marketplace</a>
+            <a href="how-it-works.html" class="py-2 font-medium text-center hover:text-blue-500">How It Works</a>
+            <a href="contact.html" class="py-2 font-bold text-blue-600 text-center">Contact Us</a>
+            <hr class="border-slate-200 dark:border-slate-700">
+            <div class="flex justify-center gap-4 py-2">
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:block"></i></button>
+            </div>
+            <a href="login.html" class="py-2 font-medium text-center hover:text-blue-500">Log In</a>
+            <a href="register.html" class="py-3 bg-blue-600 text-white font-bold rounded-xl text-center">Sell Code</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-24 md:pt-32 container mx-auto px-4 md:px-6 pb-20 relative z-10">
+        <div class="glass max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row animate-fade-in-up">
+            
+            <div class="bg-gradient-to-br from-blue-600 to-blue-800 p-8 md:p-10 md:w-2/5 text-white flex flex-col justify-between relative overflow-hidden animate-slide-in-left">
+                <div class="absolute inset-0 opacity-10 pointer-events-none">
+                    <i class="fas fa-circle absolute top-10 left-10 text-xl animate-float"></i>
+                    <i class="fas fa-square absolute bottom-20 right-10 text-2xl animate-float" style="animation-delay: 1s;"></i>
+                    <i class="fas fa-code absolute top-1/2 left-1/2 text-9xl -translate-x-1/2 -translate-y-1/2 rotate-12"></i>
+                </div>
+
+                <div class="relative z-10">
+                    <h3 class="text-3xl font-extrabold mb-4">Support Team</h3>
+                    <p class="text-blue-100 mb-8 leading-relaxed">Found a bug in a template? Need to dispute a transaction? We're here to help you 24/7.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 group">
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-blue-600 transition-colors duration-300">
+                                <i class="fas fa-map-marker-alt text-lg"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm uppercase tracking-wide opacity-80">Headquarters</p>
+                                <p class="text-sm font-medium">Uptown Bonifacio, Taguig, MM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 group">
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-blue-600 transition-colors duration-300">
+                                <i class="fas fa-envelope text-lg"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm uppercase tracking-wide opacity-80">Email</p>
+                                <p class="text-sm font-medium">support@codecrate.ph</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative z-10 flex gap-4 mt-10">
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-blue-600 transition-all hover:scale-110"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-blue-600 transition-all hover:scale-110"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-blue-600 transition-all hover:scale-110"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="p-6 md:p-10 md:w-3/5 bg-slate-50 dark:bg-slate-900/50">
+                <form class="space-y-6" onsubmit="event.preventDefault();">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="animate-fade-in-up" style="animation-delay: 100ms;">
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2 ml-1">Name</label>
+                            <input type="text" class="w-full border-b-2 border-slate-300 dark:border-slate-700 bg-transparent py-2.5 px-1 focus:border-blue-500 focus:outline-none transition-all duration-300 text-slate-800 dark:text-slate-100 placeholder-slate-400">
+                        </div>
+                        
+                        <div class="animate-fade-in-up relative z-20" style="animation-delay: 200ms;">
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2 ml-1">Subject</label>
+                            <div class="relative">
+                                <input type="hidden" id="selectedSubject" value="">
+                                
+                                <button type="button" onclick="toggleSelect()" id="selectTrigger" class="w-full flex items-center justify-between border-b-2 border-slate-300 dark:border-slate-700 bg-transparent py-2.5 px-1 text-left text-slate-900 dark:text-slate-100 focus:outline-none hover:border-blue-400 transition-all duration-300 group">
+                                    <span id="selectText" class="opacity-70 group-hover:opacity-100 transition-opacity">Choose an option...</span>
+                                    <i id="selectArrow" class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-300 group-hover:text-blue-500"></i>
+                                </button>
+
+                                <div id="selectMenu" class="absolute hidden z-50 w-full mt-2 glass rounded-xl shadow-xl overflow-hidden transform origin-top transition-all duration-200 ring-1 ring-black ring-opacity-5">
+                                    <div class="flex flex-col py-1">
+                                        <div onclick="selectOption(event, 'Selling Inquiry')" class="select-option px-4 py-3 hover:bg-blue-50 dark:hover:bg-slate-800 cursor-pointer text-sm transition-colors flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                                            <i class="fas fa-tag text-blue-500 w-4"></i> <span>Selling Inquiry</span>
+                                        </div>
+                                        <div onclick="selectOption(event, 'Report a Listing')" class="select-option px-4 py-3 hover:bg-blue-50 dark:hover:bg-slate-800 cursor-pointer text-sm transition-colors flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                                            <i class="fas fa-flag text-red-500 w-4"></i> <span>Report a Listing</span>
+                                        </div>
+                                        <div onclick="selectOption(event, 'Payment Issue')" class="select-option px-4 py-3 hover:bg-blue-50 dark:hover:bg-slate-800 cursor-pointer text-sm transition-colors flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                                            <i class="fas fa-wallet text-emerald-500 w-4"></i> <span>Payment Issue</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="animate-fade-in-up relative z-0" style="animation-delay: 300ms;">
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2 ml-1">Message</label>
+                        <textarea class="w-full border-b-2 border-slate-300 dark:border-slate-700 bg-transparent py-2.5 px-1 h-32 focus:border-blue-500 focus:outline-none transition-all duration-300 text-slate-800 dark:text-slate-100 placeholder-slate-400 resize-none"></textarea>
+                    </div>
+
+                    <div class="animate-fade-in-up" style="animation-delay: 400ms;">
+                        <button class="px-8 py-3.5 bg-gradient-to-r from-slate-900 to-slate-800 dark:from-white dark:to-slate-200 text-white dark:text-slate-900 font-bold rounded-xl hover:shadow-lg hover:-translate-y-1 transition-all duration-300 w-full md:w-auto">
+                            Submit Ticket <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-slate-900/30 backdrop-blur-md relative z-10 animate-fade-in-up" style="animation-delay: 500ms;">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div class="space-y-4">
+                    <a href="index.html" class="text-2xl font-extrabold tracking-tighter flex items-center gap-2 group">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white group-hover:rotate-12 transition-transform duration-500"><i class="fas fa-code text-sm"></i></div>
+                        <div>Code<span class="text-blue-600 dark:text-blue-400">Crate</span>PH</div>
+                    </a>
+                    <p class="text-sm text-slate-500 leading-relaxed">
+                        The #1 marketplace for student capstone projects in the Philippines. Buy verified source code or sell your old projects.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-slate-400 hover:text-blue-600 transition-all duration-300 hover:-translate-y-1"><i class="fab fa-facebook-f text-lg"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-all duration-300 hover:-translate-y-1"><i class="fab fa-twitter text-lg"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-pink-500 transition-all duration-300 hover:-translate-y-1"><i class="fab fa-instagram text-lg"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all duration-300 hover:-translate-y-1"><i class="fab fa-github text-lg"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-6">Platform</h4>
+                    <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                        <li><a href="catalog.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Browse Projects</a></li>
+                        <li><a href="register.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Sell Your Code</a></li>
+                        <li><a href="how-it-works.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">How It Works</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Pricing</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-6">Support</h4>
+                    <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                        <li><a href="contact.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Help Center</a></li>
+                        <li><a href="faqs.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">FAQs</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Community Guidelines</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Report a Bug</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-6">Legal</h4>
+                    <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                        <li><a href="privacy.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Refund Policy</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-xs text-slate-500 text-center md:text-left flex items-center gap-1">
+                    &copy; 2026 CodeCrate Philippines Inc. Made with 
+                    <i class="fas fa-heart text-red-500 animate-heartbeat"></i> 
+                    in Manila.
+                </div>
+                <div class="flex gap-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                    <i class="fab fa-cc-visa text-2xl text-slate-600 dark:text-slate-300 hover:scale-110 transition-transform" title="Visa"></i>
+                    <i class="fab fa-cc-mastercard text-2xl text-slate-600 dark:text-slate-300 hover:scale-110 transition-transform" title="Mastercard"></i>
+                    <i class="fas fa-wallet text-2xl text-blue-500 hover:scale-110 transition-transform" title="GCash"></i>
+                    <i class="fas fa-mobile-alt text-2xl text-green-500 hover:scale-110 transition-transform" title="Maya"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('animate-fade-in-up');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
+        // Custom Select Logic
+        function toggleSelect() {
+            const menu = document.getElementById('selectMenu');
+            const arrow = document.getElementById('selectArrow');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('animate-fade-in-up');
+                arrow.classList.add('rotate-180');
+            } else {
+                menu.classList.add('hidden');
+                menu.classList.remove('animate-fade-in-up');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        function selectOption(event, value) {
+            event.stopPropagation();
+            
+            document.getElementById('selectedSubject').value = value;
+            const textElement = document.getElementById('selectText');
+            textElement.innerText = value;
+            textElement.classList.remove('opacity-70');
+            textElement.classList.add('font-bold', 'text-blue-600', 'dark:text-white');
+
+            document.querySelectorAll('.select-option').forEach(opt => {
+                opt.classList.remove('bg-blue-50', 'dark:bg-slate-800');
+            });
+            event.currentTarget.classList.add('bg-blue-50', 'dark:bg-slate-800');
+
+            toggleSelect();
+            document.getElementById('selectTrigger').focus(); 
+        }
+
+        window.onclick = function(event) {
+            const trigger = document.getElementById('selectTrigger');
+            const menu = document.getElementById('selectMenu');
+            if (trigger && menu) {
+                if (!trigger.contains(event.target) && !menu.classList.contains('hidden')) {
+                    toggleSelect();
+                }
+            }
+        }
+
+        if (localStorage.theme === 'light') { document.documentElement.classList.remove('dark'); }
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) { html.classList.remove('dark'); localStorage.theme = 'light'; } 
+            else { html.classList.add('dark'); localStorage.theme = 'dark'; }
+        }
+    </script>
+</body>
+</html>
