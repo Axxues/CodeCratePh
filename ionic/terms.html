@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Terms of Service | CodeCrate PH</title>
+        <link href="assets/css/fonts.css" rel="stylesheet">
+        <link href="assets/css/all.min.css" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="assets/js/tailwind.config.js"></script>
+
+        <link rel="stylesheet" href="assets/css/style.css">
+    </head>
+    <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col relative overflow-x-hidden">
+        <div class="fixed inset-0 pointer-events-none z-0 bg-grid"></div>
+
+        <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+            <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="index.html" class="text-2xl font-extrabold tracking-tighter flex items-center gap-2 group">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white group-hover:rotate-12 transition-transform"><i class="fas fa-code text-sm"></i></div>
+                    <div>Code<span class="text-blue-600 dark:text-blue-400">Crate</span>PH</div>
+                </a>
+                
+                <div class="hidden lg:flex items-center space-x-8 text-sm font-semibold">
+                    
+                    <a href="index.html" class="relative group py-1">
+                        <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">Home</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+
+                    <a href="catalog.html" class="relative group py-1">
+                        <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">Marketplace</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+
+                    <a href="how-it-works.html" class="relative group py-1">
+                        <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">How It Works</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+
+                    <a href="faqs.html" class="relative group py-1">
+                        <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">FAQs</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+
+                    <a href="contact.html" class="relative group py-1">
+                        <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">Contact Us</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+                
+                <div class="hidden lg:flex items-center gap-4">
+                    <button onclick="toggleTheme()" class="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center transition hover:scale-110"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:block"></i></button>
+                    <a href="login.html" class="text-sm font-semibold hover:text-blue-500">Log In</a>
+                    <a href="register.html" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-full transition shadow-lg shadow-blue-500/30 hover:-translate-y-0.5">Sell Code</a>
+                </div>
+
+                <button class="lg:hidden text-2xl text-slate-700 dark:text-slate-200 focus:outline-none" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="hidden absolute top-full left-0 w-full glass-nav border-t border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-4 shadow-xl z-50 animate-fade-in-up">
+                <a href="index.html" class="py-2 font-medium text-center hover:text-blue-500">Home</a>
+                <a href="catalog.html" class="py-2 font-medium text-center hover:text-blue-500">Marketplace</a>
+                <a href="how-it-works.html" class="py-2 font-medium text-center hover:text-blue-500">How It Works</a>
+                <a href="contact.html" class="py-2 font-medium text-center hover:text-blue-500">Contact Us</a>
+                <hr class="border-slate-200 dark:border-slate-700">
+                <div class="flex justify-center gap-4 py-2">
+                    <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:block"></i></button>
+                </div>
+                <a href="login.html" class="py-2 font-medium text-center hover:text-blue-500">Log In</a>
+                <a href="register.html" class="py-3 bg-blue-600 text-white font-bold rounded-xl text-center">Sell Code</a>
+            </div>
+        </nav>
+
+        <main class="flex-grow pt-24 md:pt-32 container mx-auto px-4 md:px-6 pb-20 relative z-10">
+            <div class="glass max-w-4xl mx-auto p-6 md:p-10 rounded-3xl shadow-xl animate-fade-in-up">
+                <h1 class="text-2xl md:text-3xl font-bold mb-6 border-b border-slate-300 dark:border-slate-700 pb-4">Terms of Service</h1>
+                
+                <div class="space-y-6 text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base">
+                    <div class="animate-fade-in-up" style="animation-delay: 100ms;">
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg hover:text-blue-500 transition-colors mb-2">1. Educational Use Only</h3>
+                        <p>CodeCrate PH sells "Study Templates". We do not condone submitting purchased code as your own original work (plagiarism). Users found violating university academic integrity policies may be banned.</p>
+                    </div>
+                    
+                    <div class="animate-fade-in-up" style="animation-delay: 200ms;">
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg hover:text-blue-500 transition-colors mb-2">2. Digital Goods Policy</h3>
+                        <p>Due to the irrevocable nature of digital source code, <strong>all sales are final</strong>. Refunds are only issued if the code is proven to be corrupt or significantly different from the description.</p>
+                    </div>
+                    
+                    <div class="animate-fade-in-up" style="animation-delay: 300ms;">
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg hover:text-blue-500 transition-colors mb-2">3. Commission</h3>
+                        <p>CodeCrate PH takes a flat <strong>20% commission</strong> on every completed sale to cover server costs and payment gateway fees.</p>
+                    </div>
+                </div>
+                
+                <a href="index.html" class="inline-block mt-8 text-blue-500 font-bold hover:underline hover:translate-x-1 transition-transform text-sm md:text-base">← Back to Home</a>
+            </div>
+        </main>
+
+        <footer class="mt-20 border-t border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-slate-900/30 backdrop-blur-md relative z-10 animate-fade-in-up" style="animation-delay: 500ms;">
+            <div class="container mx-auto px-6 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                    <div class="space-y-4">
+                        <a href="index.html" class="text-2xl font-extrabold tracking-tighter flex items-center gap-2 group">
+                            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white group-hover:rotate-12 transition-transform duration-500"><i class="fas fa-code text-sm"></i></div>
+                            <div>Code<span class="text-blue-600 dark:text-blue-400">Crate</span>PH</div>
+                        </a>
+                        <p class="text-sm text-slate-500 leading-relaxed">
+                            The #1 marketplace for student capstone projects in the Philippines. Buy verified source code or sell your old projects.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="#" class="text-slate-400 hover:text-blue-600 transition-all duration-300 hover:-translate-y-1"><i class="fab fa-facebook-f text-lg"></i></a>
+                            <a href="#" class="text-slate-400 hover:text-blue-400 transition-all duration-300 hover:-translate-y-1"><i class="fab fa-twitter text-lg"></i></a>
+                            <a href="#" class="text-slate-400 hover:text-pink-500 transition-all duration-300 hover:-translate-y-1"><i class="fab fa-instagram text-lg"></i></a>
+                            <a href="#" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all duration-300 hover:-translate-y-1"><i class="fab fa-github text-lg"></i></a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-slate-900 dark:text-white mb-6">Platform</h4>
+                        <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                            <li><a href="catalog.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Browse Projects</a></li>
+                            <li><a href="register.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Sell Your Code</a></li>
+                            <li><a href="how-it-works.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">How It Works</a></li>
+                            <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Pricing</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-slate-900 dark:text-white mb-6">Support</h4>
+                        <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                            <li><a href="contact.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Help Center</a></li>
+                            <li><a href="faqs.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">FAQs</a></li>
+                            <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Community Guidelines</a></li>
+                            <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Report a Bug</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-slate-900 dark:text-white mb-6">Legal</h4>
+                        <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                            <li><a href="privacy.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Privacy Policy</a></li>
+                            <li><a href="terms.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Terms of Service</a></li>
+                            <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Refund Policy</a></li>
+                            <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs text-slate-500 text-center md:text-left flex items-center gap-1">
+                        &copy; 2026 CodeCrate Philippines Inc. Made with 
+                        <i class="fas fa-heart text-red-500 animate-heartbeat"></i> 
+                        in Manila.
+                    </div>
+                    <div class="flex gap-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                        <i class="fab fa-cc-visa text-2xl text-slate-600 dark:text-slate-300 hover:scale-110 transition-transform" title="Visa"></i>
+                        <i class="fab fa-cc-mastercard text-2xl text-slate-600 dark:text-slate-300 hover:scale-110 transition-transform" title="Mastercard"></i>
+                        <i class="fas fa-wallet text-2xl text-blue-500 hover:scale-110 transition-transform" title="GCash"></i>
+                        <i class="fas fa-mobile-alt text-2xl text-green-500 hover:scale-110 transition-transform" title="Maya"></i>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="assets/js/main.js"></script>
+    </body>
+</html>

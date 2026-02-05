@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details | CodeCrate PH</title>
+    
+    <link href="assets/css/fonts.css" rel="stylesheet">
+    <link href="assets/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/js/tailwind.config.js"></script>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-500 min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <div class="fixed inset-0 pointer-events-none z-0 bg-grid"></div>
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-extrabold tracking-tighter flex items-center gap-2 group">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white group-hover:rotate-12 transition-transform"><i class="fas fa-code text-sm"></i></div>
+                <div>Code<span class="text-blue-600 dark:text-blue-400">Crate</span>PH</div>
+            </a>
+            
+            <div class="hidden lg:flex items-center space-x-8 text-sm font-semibold">
+                
+                <a href="index.html" class="relative group py-1">
+                    <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">Home</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <a href="catalog.html" class="relative group py-1 text-blue-600 dark:text-blue-400 font-bold">
+                    <span>Marketplace</span>
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400"></span>
+                </a>
+
+                <a href="how-it-works.html" class="relative group py-1">
+                    <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">How It Works</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <a href="faqs.html" class="relative group py-1">
+                    <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">FAQs</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <a href="contact.html" class="relative group py-1">
+                    <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">Contact Us</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
+            
+            <div class="hidden lg:flex items-center gap-4">
+                <button onclick="toggleTheme()" class="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center transition hover:scale-110"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:block"></i></button>
+                <a href="login.html" class="text-sm font-semibold hover:text-blue-500">Log In</a>
+                <a href="register.html" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-full transition shadow-lg shadow-blue-500/30 hover:-translate-y-0.5">Sell Code</a>
+            </div>
+
+            <button class="lg:hidden text-2xl text-slate-700 dark:text-slate-200 focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full glass-nav border-t border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-4 shadow-xl z-50 animate-fade-in-up">
+            <a href="index.html" class="py-2 font-medium text-center hover:text-blue-500">Home</a>
+            <a href="catalog.html" class="py-2 font-bold text-blue-600 text-center">Marketplace</a>
+            <a href="how-it-works.html" class="py-2 font-medium text-center hover:text-blue-500">How It Works</a>
+            <a href="contact.html" class="py-2 font-medium text-center hover:text-blue-500">Contact Us</a>
+            <hr class="border-slate-200 dark:border-slate-700">
+            <div class="flex justify-center gap-4 py-2">
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:block"></i></button>
+            </div>
+            <a href="login.html" class="py-2 font-medium text-center hover:text-blue-500">Log In</a>
+            <a href="register.html" class="py-3 bg-blue-600 text-white font-bold rounded-xl text-center">Sell Code</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-24 md:pt-32 relative z-10 container mx-auto px-4 md:px-6 py-12">
+        
+        <div class="text-[10px] md:text-xs text-slate-500 mb-6 flex items-center gap-2 animate-fade-in-up">
+            <a href="catalog.html" class="hover:text-blue-500">Marketplace</a> <i class="fas fa-chevron-right text-[8px]"></i>
+            <span class="text-slate-400">Barangay MIS V2</span>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8 md:gap-10 animate-fade-in-up" style="animation-delay: 100ms;">
+            
+            <div class="lg:col-span-2">
+                
+                <div class="glass rounded-3xl p-2 mb-8">
+                    <div class="rounded-2xl overflow-hidden aspect-video bg-black relative group flex items-center justify-center text-slate-500">
+                        <i class="fab fa-youtube text-5xl opacity-50 group-hover:opacity-100 transition-opacity cursor-pointer text-red-600"></i>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h1 class="text-2xl md:text-3xl font-extrabold mb-4 leading-tight">Barangay Management Information System V2 (Complete Thesis)</h1>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold rounded-full">PHP Laravel 9</span>
+                        <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-xs font-bold rounded-full">MySQL</span>
+                        <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-bold rounded-full">Verified Code <i class="fas fa-check-circle ml-1"></i></span>
+                    </div>
+                </div>
+
+                <div class="border-b border-slate-200 dark:border-slate-700 mb-6 overflow-x-auto">
+                    <div class="flex gap-8 min-w-max">
+                        <button class="pb-3 border-b-2 border-blue-500 font-bold text-blue-500">Description</button>
+                        <button class="pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-300 transition">File Structure</button>
+                        <button class="pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-300 transition">Reviews (12)</button>
+                    </div>
+                </div>
+
+                <div class="prose dark:prose-invert max-w-none text-slate-600 dark:text-slate-300 mb-10 text-sm md:text-base">
+                    <p>This is a complete Capstone project ready for defense. It handles resident profiling, blotter records, permit issuance (Clearance, Residency, Indigency), and generates reports.</p>
+                    <h4 class="font-bold text-lg mt-4 mb-2 text-slate-900 dark:text-white">Features:</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>Dashboard Analytics:</strong> Population charts by gender, age, and purok.</li>
+                        <li><strong>Blotter System:</strong> Incident recording with status tracking.</li>
+                        <li><strong>Certificate Printing:</strong> Auto-generated PDF permits.</li>
+                    </ul>
+                </div>
+
+                <div class="mb-10">
+                    <h3 class="font-bold text-lg mb-4">File Structure</h3>
+                    <div class="glass rounded-xl p-4 font-mono text-sm text-slate-600 dark:text-slate-400 border-l-4 border-blue-500 overflow-x-auto max-h-80 overflow-y-auto custom-scrollbar">
+                        <div class="min-w-[300px] space-y-1">
+                            <div class="flex items-center gap-2 text-slate-900 dark:text-slate-200 font-bold"><i class="fas fa-folder-open text-blue-500"></i> barangay-system-v2</div>
+                            
+                            <div class="ml-4">
+                                <div class="flex items-center gap-2"><i class="fas fa-folder text-blue-400"></i> app</div>
+                                <div class="ml-4 border-l border-slate-300 dark:border-slate-700 pl-3">
+                                    <div class="flex items-center gap-2"><i class="fas fa-folder text-blue-400"></i> Http</div>
+                                    <div class="ml-4 border-l border-slate-300 dark:border-slate-700 pl-3">
+                                        <div class="flex items-center gap-2"><i class="fas fa-folder text-blue-400"></i> Controllers</div>
+                                        <div class="ml-4 border-l border-slate-300 dark:border-slate-700 pl-3">
+                                            <div class="flex items-center gap-2 text-blue-500"><i class="fab fa-php"></i> AuthController.php</div>
+                                            <div class="flex items-center gap-2 text-blue-500"><i class="fab fa-php"></i> ResidentController.php</div>
+                                            <div class="flex items-center gap-2 text-blue-500"><i class="fab fa-php"></i> CertificateController.php</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2"><i class="fas fa-folder text-blue-400"></i> Models</div>
+                                    <div class="ml-4 border-l border-slate-300 dark:border-slate-700 pl-3">
+                                        <div class="flex items-center gap-2 text-blue-500"><i class="fab fa-php"></i> User.php</div>
+                                        <div class="flex items-center gap-2 text-blue-500"><i class="fab fa-php"></i> Resident.php</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ml-4">
+                                <div class="flex items-center gap-2"><i class="fas fa-folder text-yellow-400"></i> database</div>
+                                <div class="ml-4 border-l border-slate-300 dark:border-slate-700 pl-3">
+                                    <div class="flex items-center gap-2"><i class="fas fa-folder text-yellow-400"></i> migrations</div>
+                                    <div class="ml-4 border-l border-slate-300 dark:border-slate-700 pl-3">
+                                        <div class="flex items-center gap-2 text-slate-500"><i class="fas fa-file-code"></i> 2024_01_01_create_residents.php</div>
+                                        <div class="flex items-center gap-2 text-slate-500"><i class="fas fa-file-code"></i> 2024_01_02_create_blotters.php</div>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-500"><i class="fas fa-database text-green-500"></i> barangay_db.sql</div>
+                                </div>
+                            </div>
+
+                            <div class="ml-4">
+                                <div class="flex items-center gap-2"><i class="fas fa-folder text-orange-400"></i> resources</div>
+                                <div class="ml-4 border-l border-slate-300 dark:border-slate-700 pl-3">
+                                    <div class="flex items-center gap-2"><i class="fas fa-folder text-orange-400"></i> views</div>
+                                    <div class="ml-4 border-l border-slate-300 dark:border-slate-700 pl-3">
+                                        <div class="flex items-center gap-2 text-orange-500"><i class="fab fa-html5"></i> dashboard.blade.php</div>
+                                        <div class="flex items-center gap-2 text-orange-500"><i class="fab fa-html5"></i> login.blade.php</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ml-4">
+                                <div class="flex items-center gap-2"><i class="fas fa-folder text-purple-400"></i> routes</div>
+                                <div class="ml-4 border-l border-slate-300 dark:border-slate-700 pl-3">
+                                    <div class="flex items-center gap-2 text-purple-500"><i class="fab fa-php"></i> web.php</div>
+                                    <div class="flex items-center gap-2 text-purple-500"><i class="fab fa-php"></i> api.php</div>
+                                </div>
+                            </div>
+                            
+                            <div class="ml-4 flex items-center gap-2 text-red-400"><i class="fas fa-cog"></i> .env.example</div>
+                            <div class="ml-4 flex items-center gap-2 text-slate-500"><i class="fas fa-file"></i> README.md</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 animate-fade-in-up" style="animation-delay: 200ms;">
+                    <div class="flex items-end justify-between mb-6">
+                        <div>
+                            <h3 class="font-bold text-lg">Reviews <span class="text-slate-500 text-sm font-normal">(12)</span></h3>
+                            <div class="flex items-center gap-1 text-yellow-400 text-sm mt-1">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                <span class="text-slate-900 dark:text-white font-bold ml-1">4.8</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8 space-y-2">
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="w-8 text-right font-bold text-slate-500">5 star</span>
+                            <div class="flex-1 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-yellow-400 rounded-full animate-grow-width" style="--w: 80%"></div>
+                            </div>
+                            <span class="w-8 text-slate-400">80%</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="w-8 text-right font-bold text-slate-500">4 star</span>
+                            <div class="flex-1 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-yellow-400 rounded-full animate-grow-width" style="--w: 15%; animation-delay: 100ms;"></div>
+                            </div>
+                            <span class="w-8 text-slate-400">15%</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="w-8 text-right font-bold text-slate-500">3 star</span>
+                            <div class="flex-1 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-yellow-400 rounded-full animate-grow-width" style="--w: 5%; animation-delay: 200ms;"></div>
+                            </div>
+                            <span class="w-8 text-slate-400">5%</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="glass p-5 rounded-xl hover:scale-[1.02] hover:shadow-xl transition-all duration-300 group cursor-default">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-md">JM</div>
+                                    <div>
+                                        <h4 class="font-bold text-sm group-hover:text-blue-500 transition-colors">John Mark D.</h4>
+                                        <p class="text-[10px] text-slate-500">BSIT Student • Feb 10, 2026</p>
+                                    </div>
+                                </div>
+                                <div class="text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            </div>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                                "Solid code structure! I learned a lot about Laravel relationships just by studying the Resident Controller. The dashboard analytics chart is exactly what we needed for our thesis defense."
+                            </p>
+                            <button onclick="toggleLike(this)" class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-red-500 transition-colors group/btn">
+                                <i class="far fa-heart group-hover/btn:scale-125 transition-transform duration-200"></i> <span>Helpful?</span>
+                            </button>
+                        </div>
+
+                        <div class="glass p-5 rounded-xl hover:scale-[1.02] hover:shadow-xl transition-all duration-300 group cursor-default">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center text-white font-bold text-xs shadow-md">AC</div>
+                                    <div>
+                                        <h4 class="font-bold text-sm group-hover:text-blue-500 transition-colors">Alyssa C.</h4>
+                                        <p class="text-[10px] text-slate-500">Web Developer • Jan 24, 2026</p>
+                                    </div>
+                                </div>
+                                <div class="text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                            </div>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                                "Good system overall. The database schema is normalized properly. Just had to tweak the CSS a bit for the printing layout on mobile, but backend is perfect."
+                            </p>
+                            <button onclick="toggleLike(this)" class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-red-500 transition-colors group/btn">
+                                <i class="far fa-heart group-hover/btn:scale-125 transition-transform duration-200"></i> <span>Helpful?</span>
+                            </button>
+                        </div>
+
+                        <div class="glass p-5 rounded-xl hover:scale-[1.02] hover:shadow-xl transition-all duration-300 group cursor-default">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-xs shadow-md">DK</div>
+                                    <div>
+                                        <h4 class="font-bold text-sm group-hover:text-blue-500 transition-colors">Dave K.</h4>
+                                        <p class="text-[10px] text-slate-500">Student • Dec 05, 2025</p>
+                                    </div>
+                                </div>
+                                <div class="text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            </div>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                                "Verified working! Seller helped me set up the .env file. Fast transaction."
+                            </p>
+                            <button onclick="toggleLike(this)" class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-red-500 transition-colors group/btn">
+                                <i class="far fa-heart group-hover/btn:scale-125 transition-transform duration-200"></i> <span>Helpful?</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full mt-6 py-3 text-sm text-blue-500 font-bold hover:bg-blue-50 dark:hover:bg-slate-800 rounded-xl transition border border-blue-200 dark:border-slate-700">
+                        View All 12 Reviews
+                    </button>
+                </div>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="glass rounded-3xl p-6 lg:sticky lg:top-28 shadow-2xl shadow-blue-900/10 border border-blue-500/30">
+                    <div class="text-5xl font-extrabold text-slate-900 dark:text-white mb-6">₱499<span class="text-lg text-slate-500 font-normal">.00</span></div>
+                    
+                    <button class="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-bold rounded-xl shadow-lg transform active:scale-95 transition-all mb-4 flex items-center justify-center gap-2">
+                        Download Now <i class="fas fa-cloud-download-alt"></i>
+                    </button>
+                    
+                    <div class="text-center text-xs text-slate-500 mb-6">
+                        <p class="mb-2">Secure Payment via:</p>
+                        <div class="flex justify-center gap-3 text-2xl text-slate-400">
+                            <i class="fas fa-wallet hover:text-blue-500 transition-colors" title="GCash"></i>
+                            <i class="fab fa-cc-mastercard hover:text-orange-500 transition-colors"></i>
+                            <i class="fab fa-cc-visa hover:text-blue-700 transition-colors"></i>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex-shrink-0"></div>
+                            <div>
+                                <p class="text-xs text-slate-500">Seller</p>
+                                <p class="font-bold text-sm">DevJuan23 <i class="fas fa-check-circle text-blue-500 text-xs"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-slate-900/30 backdrop-blur-md relative z-10 animate-fade-in-up" style="animation-delay: 500ms;">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div class="space-y-4">
+                    <a href="index.html" class="text-2xl font-extrabold tracking-tighter flex items-center gap-2 group">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white group-hover:rotate-12 transition-transform duration-500"><i class="fas fa-code text-sm"></i></div>
+                        <div>Code<span class="text-blue-600 dark:text-blue-400">Crate</span>PH</div>
+                    </a>
+                    <p class="text-sm text-slate-500 leading-relaxed">
+                        The #1 marketplace for student capstone projects in the Philippines. Buy verified source code or sell your old projects.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-slate-400 hover:text-blue-600 transition-all duration-300 hover:-translate-y-1"><i class="fab fa-facebook-f text-lg"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-all duration-300 hover:-translate-y-1"><i class="fab fa-twitter text-lg"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-pink-500 transition-all duration-300 hover:-translate-y-1"><i class="fab fa-instagram text-lg"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all duration-300 hover:-translate-y-1"><i class="fab fa-github text-lg"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-6">Platform</h4>
+                    <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                        <li><a href="catalog.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Browse Projects</a></li>
+                        <li><a href="register.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Sell Your Code</a></li>
+                        <li><a href="how-it-works.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">How It Works</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Pricing</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-6">Support</h4>
+                    <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                        <li><a href="contact.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Help Center</a></li>
+                        <li><a href="faqs.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">FAQs</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Community Guidelines</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Report a Bug</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-6">Legal</h4>
+                    <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                        <li><a href="privacy.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Refund Policy</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-1 inline-block duration-200">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-xs text-slate-500 text-center md:text-left flex items-center gap-1">
+                    &copy; 2026 CodeCrate Philippines Inc. Made with 
+                    <i class="fas fa-heart text-red-500 animate-heartbeat"></i> 
+                    in Manila.
+                </div>
+                <div class="flex gap-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                    <i class="fab fa-cc-visa text-2xl text-slate-600 dark:text-slate-300 hover:scale-110 transition-transform" title="Visa"></i>
+                    <i class="fab fa-cc-mastercard text-2xl text-slate-600 dark:text-slate-300 hover:scale-110 transition-transform" title="Mastercard"></i>
+                    <i class="fas fa-wallet text-2xl text-blue-500 hover:scale-110 transition-transform" title="GCash"></i>
+                    <i class="fas fa-mobile-alt text-2xl text-green-500 hover:scale-110 transition-transform" title="Maya"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
